@@ -5,7 +5,7 @@ import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 
 const Navbar = () => {
-  const { auth } = useSelector((state) => state.firebase)
+  const { auth, profile } = useSelector((state) => state.firebase)
 
   return (
     <nav className='purple darken-4'>
@@ -15,7 +15,11 @@ const Navbar = () => {
             MARIO
             <span className='pink-text darken-5'>PLAN</span>
           </Link>
-          {auth.isEmpty ? <SignedOutLinks /> : <SignedInLinks />}
+          {auth.isEmpty ? (
+            <SignedOutLinks />
+          ) : (
+            <SignedInLinks name={profile.name} />
+          )}
         </div>
       </div>
     </nav>

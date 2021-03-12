@@ -1,10 +1,11 @@
 import React from 'react'
+import Avatar from 'react-avatar'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userLogout } from '../../store/actions/authActions'
 
-const SignedInLinks = () => {
+const SignedInLinks = ({ name }) => {
   const dispatch = useDispatch()
 
   const logoutHandler = (e) => {
@@ -23,8 +24,13 @@ const SignedInLinks = () => {
         </a>
       </li>
       <li>
-        <Link to='/dashboard' className='btn btn-floating pink lighten-1'>
-          NN
+        <Link to='/dashboard'>
+          <Avatar
+            name={name ? name : '♡'}
+            round
+            size='40'
+            textSizeRatio={1.5}
+          />
         </Link>
       </li>
     </ul>
