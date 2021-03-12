@@ -4,4 +4,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(./images/mario-bg.png);
+  background-position: bottom center;
+  background-color: #95e8f3;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
