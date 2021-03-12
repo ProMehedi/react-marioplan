@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Dashboard from './components/dashboard/Dashboard'
 import Navbar from './components/layout/Navbar'
 
 const App = () => {
@@ -7,7 +8,9 @@ const App = () => {
     <>
       <Router>
         <Navbar />
-        <h1>Hello 3!</h1>
+        <Switch>
+          <Route exact path='/dashboard' component={Dashboard} />
+        </Switch>
       </Router>
     </>
   )
