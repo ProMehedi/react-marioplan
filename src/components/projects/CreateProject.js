@@ -11,7 +11,7 @@ const CreateProject = ({ history }) => {
   const dispatch = useDispatch()
 
   const { loading, success } = useSelector((state) => state.projects)
-  const { auth } = useSelector((state) => state.firebase)
+  const { auth, profile } = useSelector((state) => state.firebase)
 
   useEffect(() => {
     if (auth.isEmpty) {
@@ -29,8 +29,8 @@ const CreateProject = ({ history }) => {
       createProject({
         title,
         content,
-        authorName: 'Mehedi Hasan',
-        authorId: 1465,
+        authorName: profile.name,
+        authorId: auth.uid,
         createdAt: new Date(),
       })
     )
