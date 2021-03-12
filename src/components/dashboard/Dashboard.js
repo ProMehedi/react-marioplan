@@ -8,7 +8,9 @@ import { SyncLoader } from 'react-spinners'
 const Dashboard = () => {
   // Sync Data from Firebase
   const projects = useSelector((state) => state.firestore.ordered.projects)
-  useFirestoreConnect([{ collection: 'projects' }])
+  useFirestoreConnect([
+    { collection: 'projects', limit: 10, orderBy: ['createdAt', 'desc'] },
+  ])
 
   if (!projects) {
     return (
