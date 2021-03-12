@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { MoonLoader } from 'react-spinners'
+import { userLogin } from '../../store/actions/authActions'
 
 const SignIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const { loading } = useSelector((state) => state.auth)
+
+  const dispatch = useDispatch()
+
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log({ email, password })
+    dispatch(userLogin({ email, password }))
   }
 
   return (
@@ -44,10 +51,11 @@ const SignIn = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <div className='input-field'>
-                  <button type='submit' className='btn purple darken-4'>
+                <div className='input-field valign-wrapper'>
+                  <button type='submit' className='btn purple darken-4 mr-3'>
                     Sign In
                   </button>
+                  {loading && <MoonLoader size={20} color='red' />}
                 </div>
               </form>
             </div>

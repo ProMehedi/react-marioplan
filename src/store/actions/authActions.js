@@ -4,7 +4,7 @@ import {
   USER_LOGIN_FAIL,
 } from '../constants/constants'
 
-export const createProject = (user) => (
+export const userLogin = ({ email, password }) => (
   dispatch,
   getState,
   { getFirebase }
@@ -13,9 +13,9 @@ export const createProject = (user) => (
   const firebase = getFirebase()
   firebase
     .auth()
-    .signInWithEmailAndPassword(user)
-    .then(() => {
-      dispatch({ type: USER_LOGIN_SUCCESS, loading: false })
+    .signInWithEmailAndPassword(email, password)
+    .then((user) => {
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: user, loading: false })
     })
     .catch((err) => {
       dispatch({ type: USER_LOGIN_FAIL, loading: false, err })
