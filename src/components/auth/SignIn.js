@@ -7,15 +7,16 @@ const SignIn = ({ history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { loading, login, setError } = useSelector((state) => state.auth)
+  const { loading, setError } = useSelector((state) => state.auth)
+  const { auth } = useSelector((state) => state.firebase)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (login) {
+    if (!auth.isEmpty) {
       history.push('/')
     }
-  }, [history, login])
+  }, [history, auth])
 
   const submitHandler = (e) => {
     e.preventDefault()
