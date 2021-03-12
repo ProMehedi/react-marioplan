@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className='purple darken-4'>
       <div className='container'>
-        <div class='nav-wrapper'>
+        <div className='nav-wrapper'>
           <Link to='/' className='brand-logo'>
             MARIO
             <span className='pink-text darken-5'>PLAN</span>

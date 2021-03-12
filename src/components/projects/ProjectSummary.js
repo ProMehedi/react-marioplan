@@ -15,7 +15,7 @@ const ProjectSummary = () => {
         <p>Posted by Mehedi</p>
         <p className='grey-text'>3rd September, 2pm</p>
       </div>
-      <div class='card-action'>
+      <div className='card-action'>
         <Link to='/project-details'>Read More</Link>
       </div>
     </div>
