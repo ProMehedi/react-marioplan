@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-const SignUp = () => {
+const SignUp = ({ history }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const { auth } = useSelector((state) => state.firebase)
+
+  useEffect(() => {
+    if (!auth.isEmpty) {
+      history.push('/')
+    }
+  }, [history, auth])
 
   const submitHandler = (e) => {
     e.preventDefault()

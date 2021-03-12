@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import { SyncLoader } from 'react-spinners'
 
-const ProjectDetails = ({ match }) => {
-  useFirestoreConnect(() => [
-    { collection: 'projects', doc: match.params.id }, // or `todos/${props.todoId}`
-  ])
+const ProjectDetails = ({ match, history }) => {
+  useFirestoreConnect(() => [{ collection: 'projects', doc: match.params.id }])
   const project = useSelector(
     ({ firestore: { data } }) => data.projects && data.projects[match.params.id]
   )
+
+  const { auth } = useSelector((state) => state.firebase)
+
+  useEffect(() => {
+    if (auth.isEmpty) {
+      history.push('/signin')
+    }
+  }, [history, auth])
 
   if (!project) {
     return (
