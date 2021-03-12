@@ -1,9 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 
 const Navbar = () => {
+  const { auth } = useSelector((state) => state.firebase)
+
   return (
     <nav className='purple darken-4'>
       <div className='container'>
@@ -12,8 +15,7 @@ const Navbar = () => {
             MARIO
             <span className='pink-text darken-5'>PLAN</span>
           </Link>
-          <SignedInLinks />
-          <SignedOutLinks />
+          {auth.isEmpty ? <SignedOutLinks /> : <SignedInLinks />}
         </div>
       </div>
     </nav>
