@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { createProject } from '../../store/actions/projectActions'
 
 const CreateProject = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
+  const dispatch = useDispatch()
+
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log({ title, content })
+    dispatch(createProject({ id: Date.now(), title, content }))
   }
 
   return (
