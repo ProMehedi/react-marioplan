@@ -12,7 +12,7 @@ const ProjectSummary = ({ project }) => {
         <p className='grey-text'>3rd September, 2pm</p>
       </div>
       <div className='card-action'>
-        <Link to='/project/5'>Read More</Link>
+        <Link to={`/project/${project.id}`}>Read More</Link>
       </div>
     </div>
   )
