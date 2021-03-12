@@ -5,8 +5,8 @@ const ProjectDetails = () => {
     <div className='container section project-details'>
       <div className='row'>
         <div className='col s12 m8 offset-m2'>
-          <div className='card purple darken-2 project-summary'>
-            <div className='card-content white-text'>
+          <div className='card project-summary'>
+            <div className='card-content grey-text'>
               <span className='card-title'>Project Title</span>
               <p>
                 I am a very simple card. I am good at containing small bits of

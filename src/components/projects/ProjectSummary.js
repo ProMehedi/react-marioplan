@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const ProjectSummary = () => {
   return (
-    <div className='card hoverable purple darken-2 project-summary'>
-      <div className='card-content white-text'>
+    <div className='card project-summary'>
+      <div className='card-content white-grey'>
         <span className='card-title'>Project Title</span>
         <p>
           I am a very simple card. I am good at containing small bits of
@@ -16,7 +16,7 @@ const ProjectSummary = () => {
         <p className='grey-text'>3rd September, 2pm</p>
       </div>
       <div className='card-action'>
-        <Link to='/project-details'>Read More</Link>
+        <Link to='/project/5'>Read More</Link>
       </div>
     </div>
   )

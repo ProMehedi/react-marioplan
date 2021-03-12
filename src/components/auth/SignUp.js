@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-const SignIn = () => {
+const SignUp = () => {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -18,8 +19,20 @@ const SignIn = () => {
             <div className='card-content'>
               <form className='white' onSubmit={submitHandler}>
                 <h5 className='grey-text text-darken-3'>
-                  Login to your account
+                  Register for new account
                 </h5>
+                <div className='input-field'>
+                  <label htmlFor='name'></label>
+                  <input
+                    type='text'
+                    name='name'
+                    id='name'
+                    placeholder='Full Name'
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
                 <div className='input-field'>
                   <label htmlFor='email'></label>
                   <input
@@ -46,7 +59,7 @@ const SignIn = () => {
                 </div>
                 <div className='input-field'>
                   <button type='submit' className='btn purple darken-4'>
-                    Sign In
+                    Sign Up
                   </button>
                 </div>
               </form>
@@ -58,4 +71,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignUp
