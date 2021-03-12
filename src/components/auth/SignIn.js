@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { MoonLoader } from 'react-spinners'
 import { userLogin } from '../../store/actions/authActions'
@@ -14,9 +15,13 @@ const SignIn = ({ history }) => {
 
   useEffect(() => {
     if (!auth.isEmpty) {
+      toast.success('Successfully Logged in!')
       history.push('/')
     }
-  }, [history, auth])
+    if (setError) {
+      toast.error('Sorry, Logged failed!!')
+    }
+  }, [history, auth, setError])
 
   const submitHandler = (e) => {
     e.preventDefault()

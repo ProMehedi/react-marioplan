@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userLogout } from '../../store/actions/authActions'
@@ -9,6 +10,7 @@ const SignedInLinks = () => {
   const logoutHandler = (e) => {
     e.preventDefault()
     dispatch(userLogout())
+    toast.success('User Logout!')
   }
   return (
     <ul id='nav-mobile' className='right hide-on-med-and-down'>

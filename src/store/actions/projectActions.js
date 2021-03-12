@@ -9,7 +9,7 @@ export const createProject = (project) => (
   getState,
   { getFirebase, getFirestore }
 ) => {
-  dispatch({ type: CREATE_PROJECT_REQUEST, loading: true })
+  dispatch({ type: CREATE_PROJECT_REQUEST })
   const firestore = getFirebase().firestore()
   firestore
     .collection('projects')
@@ -17,9 +17,9 @@ export const createProject = (project) => (
       ...project,
     })
     .then(() => {
-      dispatch({ type: CREATE_PROJECT_SUCCESS, project, loading: false })
+      dispatch({ type: CREATE_PROJECT_SUCCESS, project })
     })
     .catch((err) => {
-      dispatch({ type: CREATE_PROJECT_FAIL, err, loading: false })
+      dispatch({ type: CREATE_PROJECT_FAIL, error: err.message })
     })
 }

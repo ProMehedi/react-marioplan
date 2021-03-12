@@ -2,6 +2,7 @@ import {
   CREATE_PROJECT_FAIL,
   CREATE_PROJECT_REQUEST,
   CREATE_PROJECT_SUCCESS,
+  CREATE_PROJECT_RESET,
 } from '../constants/constants'
 
 const initialState = {
@@ -38,15 +39,22 @@ const initialState = {
 export const projectReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_PROJECT_REQUEST:
-      return { ...state, loading: action.loading }
+      return { ...state, loading: true }
+
     case CREATE_PROJECT_SUCCESS:
       return {
         ...state,
         projects: [action.project, ...state.projects],
-        loading: action.loading,
+        loading: false,
+        success: true,
       }
+
     case CREATE_PROJECT_FAIL:
-      return { ...state, setError: action.err, loading: action.loading }
+      return { ...state, setError: action.error, loading: action.loading }
+
+    case CREATE_PROJECT_RESET:
+      return { ...state, setError: null, success: false }
+
     default:
       return state
   }

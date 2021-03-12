@@ -4,6 +4,9 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGOUT_REQUEST,
   USER_LOGOUT_SUCCESS,
+  USER_SIGNUP_REQUEST,
+  USER_SIGNUP_SUCCESS,
+  USER_SIGNUP_FAIL,
 } from '../constants/constants'
 
 export const userLogin = ({ email, password }) => (
@@ -11,7 +14,7 @@ export const userLogin = ({ email, password }) => (
   getState,
   { getFirebase }
 ) => {
-  dispatch({ type: USER_LOGIN_REQUEST, loading: true })
+  dispatch({ type: USER_LOGIN_REQUEST })
   const firebase = getFirebase()
   firebase
     .auth()
@@ -33,5 +36,29 @@ export const userLogout = () => (dispatch, getState, { getFirebase }) => {
     .signOut()
     .then(() => {
       dispatch({ type: USER_LOGOUT_SUCCESS })
+    })
+}
+
+export const userSignUp = ({ name, email, password }) => (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firebase = getFirebase()
+  const firestore = getFirestore()
+
+  dispatch({ type: USER_SIGNUP_REQUEST })
+
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((newUser) => {
+      return firestore.collection('users').doc(newUser.user.uid).set({ name })
+    })
+    .then(() => {
+      dispatch({ type: USER_SIGNUP_SUCCESS })
+    })
+    .catch((err) => {
+      dispatch({ type: USER_SIGNUP_FAIL, error: err.message })
     })
 }

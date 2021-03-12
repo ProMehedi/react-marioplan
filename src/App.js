@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import Dashboard from './components/dashboard/Dashboard'
@@ -12,6 +13,7 @@ const App = () => {
     <>
       <Router>
         <Navbar />
+        <ToastContainer />
         <Switch>
           <Route exact path='/signin' component={SignIn} />
           <Route exact path='/signup' component={SignUp} />

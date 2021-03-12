@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import { MoonLoader } from 'react-spinners'
+import { userSignUp } from '../../store/actions/authActions'
 
 const SignUp = ({ history }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const dispatch = useDispatch()
+
+  const { loading, setError } = useSelector((state) => state.auth)
   const { auth } = useSelector((state) => state.firebase)
 
   useEffect(() => {
     if (!auth.isEmpty) {
       history.push('/')
     }
-  }, [history, auth])
+    if (setError) {
+      toast.error(setError)
+    }
+  }, [history, auth, setError])
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log({ email, password })
+    dispatch(userSignUp({ name, email, password }))
   }
 
   return (
@@ -66,11 +75,13 @@ const SignUp = ({ history }) => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <div className='input-field'>
-                  <button type='submit' className='btn purple darken-4'>
+                <div className='input-field valign-wrapper'>
+                  <button type='submit' className='btn purple darken-4 mr-3'>
                     Sign Up
                   </button>
+                  {loading && <MoonLoader size={20} color='red' />}
                 </div>
+                {setError && <p className='red-text darken-3'>{setError}</p>}
               </form>
             </div>
           </div>

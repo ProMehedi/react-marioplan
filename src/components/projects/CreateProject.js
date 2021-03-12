@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MoonLoader } from 'react-spinners'
 import { createProject } from '../../store/actions/projectActions'
+import { CREATE_PROJECT_RESET } from '../../store/constants/constants'
 
 const CreateProject = ({ history }) => {
   const [title, setTitle] = useState('')
@@ -9,14 +10,18 @@ const CreateProject = ({ history }) => {
 
   const dispatch = useDispatch()
 
-  const { loading } = useSelector((state) => state.projects)
+  const { loading, success } = useSelector((state) => state.projects)
   const { auth } = useSelector((state) => state.firebase)
 
   useEffect(() => {
     if (auth.isEmpty) {
       history.push('/signin')
     }
-  }, [history, auth])
+    if (success) {
+      history.push('/')
+      dispatch({ type: CREATE_PROJECT_RESET })
+    }
+  }, [history, auth, success, dispatch])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -29,7 +34,6 @@ const CreateProject = ({ history }) => {
         createdAt: new Date(),
       })
     )
-    history.push('/dashboard')
   }
 
   return (
