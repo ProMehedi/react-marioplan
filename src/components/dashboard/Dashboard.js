@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import ProjectList from '../projects/ProjectList'
 import Notifications from './Notifications'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import { SyncLoader } from 'react-spinners'
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   // Sync Data from Firebase
   const projects = useSelector((state) => state.firestore.ordered.projects)
   useFirestoreConnect([
     { collection: 'projects', limit: 10, orderBy: ['createdAt', 'desc'] },
   ])
+
+  const { auth } = useSelector((state) => state.firebase)
+
+  useEffect(() => {
+    if (auth.isEmpty) {
+      history.push('/signin')
+    }
+  }, [history, auth])
 
   if (!projects) {
     return (

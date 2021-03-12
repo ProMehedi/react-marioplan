@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { MoonLoader } from 'react-spinners'
 import { userSignUp } from '../../store/actions/authActions'
+import { Link } from 'react-router-dom'
 
 const SignUp = ({ history }) => {
   const [name, setName] = useState('')
@@ -79,6 +80,10 @@ const SignUp = ({ history }) => {
                   <button type='submit' className='btn purple darken-4 mr-3'>
                     Sign Up
                   </button>
+                  <p>
+                    Already have an account?{' '}
+                    <Link to='/signin'>Signin Now</Link>
+                  </p>
                   {loading && <MoonLoader size={20} color='red' />}
                 </div>
                 {setError && <p className='red-text darken-3'>{setError}</p>}
