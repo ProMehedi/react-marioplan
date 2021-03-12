@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { MoonLoader } from 'react-spinners'
 import { createProject } from '../../store/actions/projectActions'
 
 const CreateProject = ({ history }) => {
@@ -7,6 +8,9 @@ const CreateProject = ({ history }) => {
   const [content, setContent] = useState('')
 
   const dispatch = useDispatch()
+
+  const { loading } = useSelector((state) => state.projects)
+  console.log(loading)
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -56,10 +60,11 @@ const CreateProject = ({ history }) => {
                     onChange={(e) => setContent(e.target.value)}
                   ></textarea>
                 </div>
-                <div className='input-field'>
-                  <button type='submit' className='btn purple darken-4'>
+                <div className='input-field valign-wrapper'>
+                  <button type='submit' className='btn purple darken-4 mr-3'>
                     Create
                   </button>
+                  {loading && <MoonLoader size={20} color='red' />}
                 </div>
               </form>
             </div>
