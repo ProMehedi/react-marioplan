@@ -10,7 +10,15 @@ const CreateProject = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(createProject({ id: Date.now().toString(), title, content }))
+    dispatch(
+      createProject({
+        title,
+        content,
+        authorName: 'Mehedi Hasan',
+        authorId: 1465,
+        createdAt: new Date(),
+      })
+    )
     history.push('/dashboard')
   }
 

@@ -1,10 +1,15 @@
-import { CREATE_PROJECT } from '../constants/constants'
+import {
+  CREATE_PROJECT_FAIL,
+  CREATE_PROJECT_REQUEST,
+  CREATE_PROJECT_SUCCESS,
+} from '../constants/constants'
 
 export const createProject = (project) => (
   dispatch,
   getState,
   { getFirebase, getFirestore }
 ) => {
+  dispatch({ type: CREATE_PROJECT_REQUEST, loading: true })
   const firestore = getFirebase().firestore()
   firestore
     .collection('projects')
@@ -12,9 +17,9 @@ export const createProject = (project) => (
       ...project,
     })
     .then(() => {
-      dispatch({ type: CREATE_PROJECT, project })
+      dispatch({ type: CREATE_PROJECT_SUCCESS, project, loading: false })
     })
     .catch((err) => {
-      console.log(err)
+      dispatch({ type: CREATE_PROJECT_FAIL, err, loading: false })
     })
 }
