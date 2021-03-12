@@ -5,6 +5,8 @@ import {
 } from '../constants/constants'
 
 const initialState = {
+  setError: null,
+  loading: false,
   projects: [
     {
       id: '1',

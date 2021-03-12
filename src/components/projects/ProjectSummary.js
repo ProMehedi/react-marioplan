@@ -8,7 +8,7 @@ const ProjectSummary = ({ project }) => {
         <span className='card-title'>{project.title}</span>
         <p>{project.content}</p>
         <br />
-        <p>Posted by Mehedi</p>
+        <p>Posted by {project.authorName}</p>
         <p className='grey-text'>3rd September, 2pm</p>
       </div>
       <div className='card-action'>
