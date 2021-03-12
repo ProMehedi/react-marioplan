@@ -12,6 +12,7 @@ import firebase from './config/firebase'
 const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true,
+  isInitializingReducer: true,
 }
 
 const rrfProps = {
