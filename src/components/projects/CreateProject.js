@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createProject } from '../../store/actions/projectActions'
 
-const CreateProject = () => {
+const CreateProject = ({ history }) => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
@@ -10,7 +10,8 @@ const CreateProject = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(createProject({ id: Date.now(), title, content }))
+    dispatch(createProject({ id: Date.now().toString(), title, content }))
+    history.push('/dashboard')
   }
 
   return (

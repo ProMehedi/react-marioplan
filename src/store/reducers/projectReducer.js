@@ -34,7 +34,7 @@ export const projectReducer = (state = initialState, action) => {
     case CREATE_PROJECT:
       return {
         ...state,
-        projects: [...state.projects, action.project],
+        projects: [action.project, ...state.projects],
       }
     default:
       return state
