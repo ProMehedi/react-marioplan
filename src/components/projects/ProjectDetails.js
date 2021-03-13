@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import moment from 'moment'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import { SyncLoader } from 'react-spinners'
 
@@ -10,6 +11,7 @@ const ProjectDetails = ({ match, history }) => {
   )
 
   const { auth } = useSelector((state) => state.firebase)
+  const momentDate = moment(project.createdAt.toDate()).calendar()
 
   useEffect(() => {
     if (auth.isEmpty) {
@@ -37,9 +39,7 @@ const ProjectDetails = ({ match, history }) => {
             </div>
             <div className='card-action'>
               <span className='grey-text'>Posted by {project.authorName}</span>
-              <span className='grey-text right'>
-                {project.createdAt.seconds}
-              </span>
+              <span className='grey-text right'>{momentDate}</span>
             </div>
           </div>
         </div>
